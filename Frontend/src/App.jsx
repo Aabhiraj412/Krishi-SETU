@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Signin from "./Pages/Signin";
+import Chat from "./Pages/Chat";
+import Profile from "./Pages/Profile";
+// import Profile from "./Pages/Test";
+import useStore from "./Store/Store.js";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+	const { data } = useStore();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+	return (
+		<div>
+			<Routes>
+				<Route path="/" element={data ? <Profile /> : <Home />} />
+				<Route path="/login" element={data ? <Profile /> : <Login />} />
+				<Route
+					path="/signin"
+					element={data ? <Profile /> : <Signin />}
+				/>
+				<Route path="/chat" element={data ? <Chat /> : <Login />} />
+				<Route
+					path="/profile"
+					element={data ? <Profile /> : <Login />}
+				/>
+			</Routes>
+		</div>
+	);
+};
 
-export default App
+export default App;

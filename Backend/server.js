@@ -26,9 +26,11 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	cors({
-		origin: "*",
+		origin: "http://localhost:5173",
 		methods: ["GET", "POST", "PUT", "DELETE"],
 		credentials: true,
+		allowedHeaders: ["Content-Type", "Authorization"],
+		exposedHeaders: ["Content-Range", "X-Content-Range"],
 	})
 );
 
