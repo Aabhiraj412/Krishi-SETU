@@ -22,7 +22,7 @@ export const chat = async (req, res) => {
 		user.chats.push(newMessage._id);
 		await user.save();
 
-		const resp = await ai(message);
+		const resp = await ai(message, user.location);
 		if (!resp) {
 			return res.status(400).json({ message: "AI Server Failed" });
 		}

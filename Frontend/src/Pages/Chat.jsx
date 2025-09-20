@@ -3,6 +3,7 @@ import { FaPaperPlane, FaImage, FaPlay, FaTrash } from "react-icons/fa";
 import useStore from "../Store/Store";
 import AudioRecorder from "../Components/AudioRecorder";
 import Navbar from "../Components/Navbar";
+import MessageBubble from "../Components/MessageBubble";
 
 const Chat = () => {
 	const [messages, setMessages] = useState([]);
@@ -115,35 +116,6 @@ const Chat = () => {
 		}
 	};
 
-	const MessageBubble = ({ message }) => (
-		<div
-			className={`flex ${
-				message.sender === "user" ? "justify-end" : "justify-start"
-			} mb-4`}
-		>
-			<div
-				className={`max-w-[70%] rounded-lg p-3 ${
-					message.sender === "user"
-						? "bg-green-500 text-white rounded-tr-none"
-						: isDarkMode
-						? "bg-gray-700 text-white rounded-tl-none"
-						: "bg-gray-200 text-gray-800 rounded-tl-none"
-				}`}
-			>
-				<p>{message.message}</p>
-				<span
-					className={`text-xs ${
-						message.sender === "user"
-							? "text-white/70"
-							: "text-gray-500"
-					} block mt-1`}
-				>
-					{new Date(message.createdAt).toLocaleTimeString()}
-				</span>
-			</div>
-		</div>
-	);
-
 	return (
 		<div
 			className={`flex flex-col h-screen ${
@@ -171,8 +143,12 @@ const Chat = () => {
 
 			{/* Messages Container */}
 			<div className="flex-1 overflow-y-auto p-4">
-				{messages.map((message) => (
-					<MessageBubble key={message.id} message={message} />
+				{messages.map((message, index) => (
+					<MessageBubble
+						key={message.id || index}
+						message={message}
+						isDarkMode={isDarkMode}
+					/>
 				))}
 				{isLoading && (
 					<div className="flex justify-start mb-4">
