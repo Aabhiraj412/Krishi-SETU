@@ -85,7 +85,7 @@ const parseMarkdown = (text) => {
 	return processedLines.join("<br>");
 };
 
-const MessageBubble = ({ message, isDarkMode }) => {
+const MessageBubble = ({message, isDarkMode }) => {
 	const renderedMessage = parseMarkdown(message.message);
 
 	return (
@@ -103,6 +103,26 @@ const MessageBubble = ({ message, isDarkMode }) => {
 						: "bg-gray-200 text-gray-800 rounded-tl-none"
 				}`}
 			>
+				{message.image && (
+					<img
+						src={`${import.meta.env.VITE_API_URL}/public${
+							message.image
+						}`}
+						alt="User uploaded"
+						className="max-w-full rounded-lg"
+					/>
+				)}
+				{message.audio && (
+					<audio
+						controls
+						src={`${import.meta.env.VITE_API_URL}/public${
+							message.audio
+						}`}
+						className="w-50 mt-2 rounded-lg sm:w-40 md:w-60 lg:w-80"
+					>
+						Your browser does not support the audio element.
+					</audio>
+				)}
 				<div
 					className="text-sm leading-relaxed"
 					dangerouslySetInnerHTML={{ __html: renderedMessage }}

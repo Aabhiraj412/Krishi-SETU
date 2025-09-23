@@ -8,6 +8,9 @@ const ChatsSchema = new mongoose.Schema({
     image:{
         type: String
     },
+    audio:{
+        type: String
+    },
     sender:{
         type: String,
         enum: ["user","agri","ai"],

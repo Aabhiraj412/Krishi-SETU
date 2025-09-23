@@ -78,7 +78,7 @@ const AudioRecorder = ({ onAudioStop }) => {
 					className="p-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors"
 					title="Start Recording"
 				>
-					<FaMicrophone size={16} />
+					<FaMicrophone size={32} />
 				</button>
 			) : (
 				<>
@@ -87,15 +87,15 @@ const AudioRecorder = ({ onAudioStop }) => {
 						className="p-2 rounded-lg bg-gray-500 hover:bg-gray-600 text-white transition-colors"
 						title="Stop Recording"
 					>
-						<FaStop size={16} />
+						<FaStop size={32} />
 					</button>
-					<button
+					{/* <button
 						onClick={cancelRecording}
 						className="p-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors"
 						title="Cancel Recording"
 					>
 						<FaTrash size={16} />
-					</button>
+					</button> */}
 				</>
 			)}
 		</div>

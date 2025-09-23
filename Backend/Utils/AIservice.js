@@ -1,5 +1,7 @@
+
 import Groq from "groq-sdk";
 import dotenv from "dotenv";
+import { imageProcessor } from "./ImageService.js";
 
 dotenv.config();
 
@@ -145,7 +147,3 @@ Weather info: ${JSON.stringify(data)}.`;
 	}
 };
 
-
-const imageProcessor = async (image) =>{
-	return "Tomato Leaf is Healthy"
-}

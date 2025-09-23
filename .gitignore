@@ -74,3 +74,12 @@ Backend/build/
 # Ignore build artifacts in App
 App/dist/
 App/build/
+
+# Ignore environment files in all major folders
+Frontend/.env
+Backend/.env
+App/.env
+
+# Images and Audio Uploads
+Backend/public/images/
+Backend/public/audio/
