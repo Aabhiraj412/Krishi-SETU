@@ -19,9 +19,8 @@ const Navbar = () => {
 	const languages = [
 		{ code: "en", name: "English" },
 		{ code: "hi", name: "हिंदी" },
-		{ code: "gu", name: "ગુજરાતી" },
-		{ code: "mr", name: "मराठी" },
-		{ code: "bn", name: "বাংলা" },
+		{ code: "ml", name: "മലയാളം" },
+
 	];
 
 	return (

@@ -6,6 +6,7 @@ import Profile from "./Pages/Profile";
 // import Profile from "./Pages/Test";
 import useStore from "./Store/Store.js";
 import { Route, Routes } from "react-router-dom";
+import './index.css';
 
 const App = () => {
 	const { data } = useStore();

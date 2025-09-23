@@ -27,8 +27,7 @@ const Home = () => {
 		{ code: "en", name: "English" },
 		{ code: "hi", name: "हिंदी" },
 		{ code: "ml", name: "മലയാളം" },
-		{ code: "gu", name: "ગુજરાતી" },
-		{ code: "bn", name: "বাংলা" },
+
 	];
 
 	const features = [
