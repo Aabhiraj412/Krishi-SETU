@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import path from "path";
 
 import { ConnectDB } from "./Database/ConnectDB.js";
 import AuthRoutes from "./Routes/Auth.route.js";
@@ -38,6 +39,8 @@ app.use(
 app.use("/api/auth", AuthRoutes);
 app.use("/api/user", UserRoutes);
 app.use("/api/agri", AgriRoutes);
+
+app.use("/public", express.static(path.join(process.cwd(), "public")));
 
 // Connect to MongoDB and start the server
 app.listen(PORT, () => {
