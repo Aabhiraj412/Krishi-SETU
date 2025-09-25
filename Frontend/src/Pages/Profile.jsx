@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
 import {
     User,
     Phone,
@@ -34,6 +35,7 @@ const Profile = () => {
     const [weatherLoading, setWeatherLoading] = useState(false);
     const { data, isDarkMode, setData } = useStore();
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     // Fetch weather data
     useEffect(() => {
@@ -240,7 +242,7 @@ const Profile = () => {
                             }`}
                         >
                             <User className="w-5 h-5 mr-2 text-green-500" />
-                            Personal Information
+                           {t("personalInformation")}
                         </h2>
                         <div
                             className={`space-y-6 ${
@@ -253,7 +255,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-500">
-                                        Full Name
+                                       {t("fullName")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -273,7 +275,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-500">
-                                        Phone Number
+                                      {t("phoneNumber")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -293,7 +295,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-500">
-                                        Location
+                                       {t("location")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -321,7 +323,7 @@ const Profile = () => {
                             }`}
                         >
                             <BarChart3 className="w-5 h-5 mr-2 text-green-500" />
-                            Account Statistics
+                          {t("accountStatistics")}
                         </h2>
                         <div
                             className={`space-y-6 ${
@@ -334,7 +336,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-500">
-                                        Member Since
+                                     {t("memberSince")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -354,7 +356,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-500">
-                                        Total Chats
+                                     {t("totalChats")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -377,7 +379,7 @@ const Profile = () => {
                             className="w-full flex items-center justify-center gap-3 px-6 py-4 text-white bg-gradient-to-r from-green-500 to-green-400 rounded-xl hover:from-green-600 hover:to-green-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-green-500/25 transform hover:-translate-y-0.5"
                         >
                             <MessageCircle className="w-5 h-5" />
-                            <span className="font-semibold">Go to Chat</span>
+                            <span className="font-semibold">{t("goToChat")} </span>
                         </button>
                         <button
                             onClick={handleLogout}
@@ -393,7 +395,7 @@ const Profile = () => {
                         >
                             <LogOut className="w-5 h-5" />
                             <span className="font-semibold">
-                                {loading ? "Logging out..." : "Logout"}
+                                 {loading ? t("loggingOut") || "Logging out..." : t("logout")}
                             </span>
                         </button>
                     </div>
@@ -420,24 +422,18 @@ const Profile = () => {
                                                 : "text-red-700"
                                         }`}
                                     >
-                                        Weather Alerts
+                                      {t("weatherAlerts")}
                                     </h3>
                                     <ul className="mt-2 space-y-2">
                                         {weather.alerts.alert.map(
                                             (alert, index) => (
                                                 <li key={index}>
-                                                    <p
-                                                        className={`text-sm ${
-                                                            isDarkMode
-                                                                ? "text-gray-300"
-                                                                : "text-gray-800"
-                                                        }`}
-                                                    >
-                                                        <strong>
-                                                            {alert.headline}:
-                                                        </strong>{" "}
-                                                        {alert.desc}
-                                                    </p>
+                                                    <p className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-800"}`}>
+  <strong>{t("weatherAlerts")}:</strong>
+  <br />
+  {t("riverAlertDesc")}
+</p>
+
                                                     <p
                                                         className={`text-xs mt-1 ${
                                                             isDarkMode
@@ -487,7 +483,7 @@ const Profile = () => {
                                     }`}
                                 >
                                     <Cloud className="w-5 h-5 mr-2 text-blue-500" />
-                                    Current Weather - {weather.location.name}
+                                 {t("currentWeather")} -{" "} {weather.location.name}
                                 </h2>
                                 <div className="flex items-center text-sm text-gray-500">
                                     <MapPin className="w-4 h-4 mr-1" />
@@ -526,7 +522,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         }`}
                                     >
-                                        Feels like {weather.current.feelslike_c}
+                                       {t("feelsLike")} {weather.current.feelslike_c}
                                         °C
                                     </p>
                                 </div>
@@ -559,7 +555,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         }`}
                                     >
-                                        Cloud: {weather.current.cloud}%
+                                      {t("cloud")} : {weather.current.cloud}%
                                     </p>
                                 </div>
 
@@ -591,7 +587,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         }`}
                                     >
-                                        Humidity
+                                     {t("humidity")}
                                     </p>
                                 </div>
 
@@ -623,7 +619,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         }`}
                                     >
-                                        km/h {weather.current.wind_dir}
+                                {t("wind")}  km/h {weather.current.wind_dir}
                                     </p>
                                 </div>
                             </div>
@@ -651,8 +647,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                Pressure
-                                            </p>
+                                              {t("pressure")}                                          </p>
                                             <p
                                                 className={`font-semibold ${
                                                     isDarkMode
@@ -687,7 +682,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                Visibility
+                                              {t("visibility")}
                                             </p>
                                             <p
                                                 className={`font-semibold ${
@@ -723,7 +718,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                UV Index
+                                             {t("uvIndex")}
                                             </p>
                                             <p
                                                 className={`font-semibold ${
@@ -759,7 +754,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                Dew Point
+                                              {t("dewPoint")}
                                             </p>
                                             <p
                                                 className={`font-semibold ${
@@ -798,7 +793,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                Sunrise
+                                             {t("sunrise")}
                                             </p>
                                             <p
                                                 className={`font-semibold ${
@@ -838,7 +833,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                Sunset
+                                              {t("sunset")}
                                             </p>
                                             <p
                                                 className={`font-semibold ${
@@ -878,7 +873,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                Moonrise
+                                               {t("moonrise")}
                                             </p>
                                             <p
                                                 className={`font-semibold ${
@@ -918,7 +913,7 @@ const Profile = () => {
                                                         : "text-gray-600"
                                                 }`}
                                             >
-                                                Moon Phase
+                                               {t("moonPhase")}
                                             </p>
                                             <p
                                                 className={`font-semibold text-xs ${
@@ -955,7 +950,7 @@ const Profile = () => {
                                 }`}
                             >
                                 <Leaf className="w-5 h-5 mr-2 text-green-500" />
-                                Air Quality Index
+                               {t("airQualityIndex")} 
                             </h2>
 
                             <div className="mb-6">
@@ -1001,7 +996,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        PM2.5
+                                     {t("pm25")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -1021,7 +1016,7 @@ const Profile = () => {
                                                 : "text-gray-500"
                                         }`}
                                     >
-                                        μg/m³
+                                      μg/m³
                                     </p>
                                 </div>
                                 <div
@@ -1042,8 +1037,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        PM10
-                                    </p>
+                                       {t("pm10")}                                    </p>
                                     <p
                                         className={`text-lg font-semibold ${
                                             isDarkMode
@@ -1062,7 +1056,7 @@ const Profile = () => {
                                                 : "text-gray-500"
                                         }`}
                                     >
-                                        μg/m³
+                                      μg/m³
                                     </p>
                                 </div>
                                 <div
@@ -1083,7 +1077,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        Ozone
+                                    {t("ozone")}    
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -1124,7 +1118,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        NO2
+                                      {t("no2")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -1165,7 +1159,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        SO2
+                                       {t("so2")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -1206,7 +1200,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        CO
+                                       {t("co")}
                                     </p>
                                     <p
                                         className={`text-lg font-semibold ${
@@ -1248,7 +1242,7 @@ const Profile = () => {
                                 }`}
                             >
                                 <Calendar className="w-5 h-5 mr-2 text-blue-500" />
-                                Today's Forecast
+                               {t("todaysForecast")}
                             </h2>
 
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1269,7 +1263,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        High
+                                      {t("high")}
                                     </p>
                                     <p
                                         className={`text-xl font-bold ${
@@ -1305,7 +1299,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        Low
+                                       {t("low")}
                                     </p>
                                     <p
                                         className={`text-xl font-bold ${
@@ -1341,7 +1335,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        Rain Chance
+                                       {t("rainChance")}
                                     </p>
                                     <p
                                         className={`text-xl font-bold ${
@@ -1377,7 +1371,7 @@ const Profile = () => {
                                                 : "text-gray-600"
                                         } mb-1`}
                                     >
-                                        UV Index
+                                      {t("uvIndex")}
                                     </p>
                                     <p
                                         className={`text-xl font-bold ${
@@ -1414,7 +1408,7 @@ const Profile = () => {
                                                         : "text-gray-700"
                                                 }`}
                                             >
-                                                Max Wind Speed
+                                               {t("maxWindSpeed")}
                                             </span>
                                         </div>
                                         <span
@@ -1454,7 +1448,7 @@ const Profile = () => {
                                                         : "text-gray-700"
                                                 }`}
                                             >
-                                                Avg Humidity
+                                              {t("avgHumidity")}
                                             </span>
                                         </div>
                                         <span

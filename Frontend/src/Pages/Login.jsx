@@ -3,6 +3,7 @@ import { FaSeedling, FaLock, FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import useStore from "../Store/Store";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
 import { SuccessAlert, ErrorAlert } from "../Components/Alert";
 
 const Login = () => {
@@ -16,6 +17,7 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { isDarkMode, setData } = useStore();
+    const { t } = useLanguage();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -506,26 +508,7 @@ const Login = () => {
             <div className="useit1-login-bg">
                 <Navbar />
 
-                {/* UseIt1 Theme Indicator */}
-                <div
-                    style={{
-                        position: 'fixed',
-                        top: '20px',
-                        right: '20px',
-                        background: 'linear-gradient(135deg, #22c55e, #34d399)',
-                        color: 'white',
-                        padding: '10px 20px',
-                        borderRadius: '25px',
-                        fontSize: '13px',
-                        fontWeight: '700',
-                        zIndex: '9999',
-                        boxShadow: '0 8px 25px rgba(34, 197, 94, 0.5)',
-                        backdropFilter: 'blur(15px)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)'
-                    }}
-                >
-                    🌱 UseIt1 Login Portal
-                </div>
+               
 
                 {alert &&
                     (alert.type === "success" ? (
@@ -557,14 +540,14 @@ const Login = () => {
                                     color: isDarkMode ? 'white' : '#111827',
                                     textShadow: '0 2px 4px rgba(0,0,0,0.1)'
                                 }}>
-                                Welcome Back
+                             {t("welcomeBack")} {/* use the key from your language JSON */}
                             </h2>
                             <p className="mt-3 text-lg text-center"
                                 style={{
                                     color: isDarkMode ? '#d1d5db' : '#6b7280',
                                     opacity: 0.9
                                 }}>
-                                Sign in to continue to Krishi SETU
+                                {t("signInToContinue")} {/* use the    key from your language JSON */}
                             </p>
                         </div>
 
@@ -576,7 +559,7 @@ const Login = () => {
                                     style={{
                                         color: isDarkMode ? '#e5e7eb' : '#374151'
                                     }}>
-                                    Phone Number
+                                   {t("phoneNumber")} 
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -607,7 +590,7 @@ const Login = () => {
                                     style={{
                                         color: isDarkMode ? '#e5e7eb' : '#374151'
                                     }}>
-                                    Password
+                                    {t("password")}
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -664,12 +647,12 @@ const Login = () => {
                                             color: isDarkMode ? '#e5e7eb' : '#374151',
                                         }}
                                     >
-                                        Remember me
+                                       {t("rememberMe")}
                                     </label>
                                 </div>
                                 <div>
                                     <a href="#" className="useit1-link text-base font-medium">
-                                        Forgot your password?
+                                      {t("forgotPassword")}  
                                     </a>
                                 </div>
                             </div>
@@ -703,7 +686,7 @@ const Login = () => {
                                             ></path>
                                         </svg>
                                     ) : (
-                                        "Sign in"
+                                        t("signIn")
                                     )}
                                 </button>
                             </div>
@@ -717,8 +700,7 @@ const Login = () => {
                                 }}>
                                 Don't have an account?{" "}
                                 <a href="/signin" className="useit1-link font-semibold">
-                                    Sign up now
-                                </a>
+                                   {t("signUpNow")}                                </a>
                             </p>
                         </div>
                     </div>

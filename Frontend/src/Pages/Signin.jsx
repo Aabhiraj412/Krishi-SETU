@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import {
 	FaSeedling,
 	FaLock,
@@ -40,6 +41,7 @@ const Signin = () => {
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const { isDarkMode, setData } = useStore();
+	const { t } = useLanguage();
 
 	const handleChange = async (e) => {
 		const { name, value } = e.target;
@@ -245,14 +247,14 @@ const Signin = () => {
 								isDarkMode ? "text-white" : "text-gray-900"
 							}`}
 						>
-							Create Account
+						{t("createAccount")} 
 						</h2>
 						<p
 							className={`mt-2 text-sm ${
 								isDarkMode ? "text-gray-400" : "text-gray-600"
 							}`}
 						>
-							Join Krishi SETU today
+							{t("joinKrishiToday")} 
 						</p>
 					</div>
 
@@ -268,7 +270,7 @@ const Signin = () => {
 										: "text-gray-700"
 								}`}
 							>
-								Full Name
+							{t("fullName")}	
 							</label>
 							<div className="mt-1 relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -308,7 +310,7 @@ const Signin = () => {
 										: "text-gray-700"
 								}`}
 							>
-								Phone Number
+							{t("phoneNumber")}
 							</label>
 							<div className="mt-1 relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -348,7 +350,7 @@ const Signin = () => {
 										: "text-gray-700"
 								}`}
 							>
-								Location
+							{t("location")}
 							</label>
 							<div className="mt-1">
 								<div className="relative">
@@ -775,7 +777,7 @@ const Signin = () => {
 										: "text-gray-700"
 								}`}
 							>
-								Password
+							{t("password")}	
 							</label>
 							<div className="mt-1 relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -840,8 +842,7 @@ const Signin = () => {
 										: "text-gray-700"
 								}`}
 							>
-								Confirm Password
-							</label>
+							{t("confirmPassword")}							</label>
 							<div className="mt-1 relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 									<FaLock
@@ -947,13 +948,12 @@ const Signin = () => {
 								isDarkMode ? "text-gray-400" : "text-gray-600"
 							}`}
 						>
-							Already have an account?{" "}
+						{t("alreadyHaveAccount")}{" "}
 							<Link
 								to="/login"
 								className="font-medium text-green-500 hover:text-green-400"
 							>
-								Sign in instead
-							</Link>
+							{t("signInToContinue")}							</Link>
 						</p>
 					</div>
 				</div>

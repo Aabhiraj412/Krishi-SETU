@@ -4,6 +4,7 @@ import useStore from "../Store/Store";
 import AudioRecorder from "../Components/AudioRecorder";
 import Navbar from "../Components/Navbar";
 import MessageBubble from "../Components/MessageBubble";
+import { useLanguage } from "../context/LanguageContext";
 
 const Chat = () => {
 	const [messages, setMessages] = useState([]);
@@ -19,6 +20,7 @@ const Chat = () => {
 	const messagesEndRef = useRef(null);
 	const fileInputRef = useRef(null);
 	const { isDarkMode } = useStore();
+	const { t } = useLanguage();
 
 	useEffect(() => {
 		const fetchChats = async () => {
@@ -252,7 +254,7 @@ const Chat = () => {
 							}`}
 						>
 							<span className="ml-2 text-green-500 font-semibold text-sm select-none">
-								Loading messages...
+							{t("loadingMessages")}
 							</span>
 							{[0, 1, 2].map((i) => (
 								<div
@@ -422,7 +424,7 @@ const Chat = () => {
 									!e.shiftKey &&
 									handleTextSubmit(e)
 								}
-								placeholder="Type your message..."
+								placeholder={t("typeMessagePlaceholder")}
 								className={`flex-1 w-1/2 rounded-3xl border-2 px-6 py-4 text-lg placeholder-green-400 focus:outline-none focus:ring-4 focus:ring-green-500 transition shadow-lg max-w-full ${
 									isDarkMode
 										? "bg-green-900 border-green-700 text-green-100"
