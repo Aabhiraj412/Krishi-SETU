@@ -5,9 +5,11 @@ import AudioRecorder from "../Components/AudioRecorder";
 import Navbar from "../Components/Navbar";
 import MessageBubble from "../Components/MessageBubble";
 import { useLanguage } from "../context/LanguageContext";
+import { ErrorAlert, SuccessAlert } from "../Components/Alert";
 
 const Chat = () => {
 	const [messages, setMessages] = useState([]);
+	const [alert, setAlert] = useState(null);
 	const [inputText, setInputText] = useState("");
 	const [audioBlob, setAudioBlob] = useState(null);
 	const [imagePreview, setImagePreview] = useState(null);
@@ -84,7 +86,12 @@ const Chat = () => {
 			} else throw new Error("Failed to send message");
 		} catch (error) {
 			console.error("Error sending message:", error);
-			alert("Failed to send message. Please try again.");
+			// alert("Failed to send message. Please try again.");
+			setAlert({
+				type: "error",
+				title: t("error"),
+				message: t("failedToSendMessage"),
+			});
 			return false;
 		} finally {
 			setIsLoading(false);
@@ -104,7 +111,12 @@ const Chat = () => {
 		if (!file) return;
 
 		if (file.size > 5 * 1024 * 1024) {
-			alert("Image size should be less than 5MB");
+			// alert("Image size should be less than 5MB");
+			setAlert({
+				type: "error",
+				title: t("error"),
+				message: t("imageSizeError"),
+			});
 			return;
 		}
 
@@ -161,7 +173,12 @@ const Chat = () => {
 			}
 		} catch (err) {
 			console.error("Upload error:", err);
-			alert("Image upload failed. Please try again.");
+			// alert("Image upload failed. Please try again.");
+			setAlert({
+				type: "error",
+				title: t("error"),
+				message: t("imageUploadError"),
+			});
 		} finally {
 			setUploadingImage(false);
 		}
@@ -208,7 +225,12 @@ const Chat = () => {
 			}
 		} catch (err) {
 			console.error("Audio upload error:", err);
-			alert("Audio upload failed. Please try again.");
+			// alert("Audio upload failed. Please try again.");
+			setAlert({
+				type: "error",
+				title: t("error"),
+				message: t("audioUploadError"),
+			});
 		}
 		finally{
 			setIsLoading(false);
@@ -223,7 +245,21 @@ const Chat = () => {
 		>
 			<div className="useit1-login-bg flex flex-col h-full">
 				<Navbar />
-
+{alert &&
+				(alert.type === "success" ? (
+					<SuccessAlert
+						title={alert.title}
+						message={alert.message}
+						onClose={() => setAlert(null)}
+					/>
+				) : (
+					<ErrorAlert
+						title={alert.title}
+						message={alert.message}
+						onClose={() => setAlert(null)}
+					/>
+				))}
+			
 				{/* Header */}
 				{/* <header
 					className={`sticky top-16 z-20 p-6 border-b backdrop-blur-md bg-opacity-80 shadow-lg ${

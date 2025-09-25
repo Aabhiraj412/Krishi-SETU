@@ -563,7 +563,9 @@ const Login = () => {
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                        <FaPhone className="h-6 w-6 useit1-input-icon" />
+                                        <FaPhone
+                                         className="h-6 w-6 useit1-input-icon" 
+                                        />
                                     </div>
                                     <input
                                         id="phone"
